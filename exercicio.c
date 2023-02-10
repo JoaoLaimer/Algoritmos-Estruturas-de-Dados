@@ -20,7 +20,7 @@ int main(void){
 bool IsHappy(int number)
 {
 
- int separetedNum_array[31],temp = 0,*num_array,*startPoint,i,j;
+ int separetedNum_array[31],temp = 0,*num_array,*startPoint,i;
  bool flag = false;
 
     
@@ -74,7 +74,7 @@ bool IsHappy(int number)
 
 bool RepeatDetector(int *array,int size)
 {
-    int *p,*q,flag = 0,i;
+    int *p,*q,i;
 
     p = array+size;
 
@@ -86,6 +86,7 @@ bool RepeatDetector(int *array,int size)
                     break;
                 }
             }
+    return false;
 }
 /*
 bool isHappy(int n){
