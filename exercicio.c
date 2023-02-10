@@ -88,39 +88,3 @@ bool RepeatDetector(int *array,int size)
             }
     return false;
 }
-/*
-bool isHappy(int n){
-
- int u[31],temp = 0,i;
-
-    do
-    {   
-        temp++;
-        
-        for(i = 31; i>=0; i--)
-        {
-            u[i] = n/pow(10,i);
-            n = n - u[i]*pow(10,i);
-        }
-
-        for(i = 31; i >= 0; i--)
-        {
-            n += pow(u[i],2);
-        }
-    }while((temp < 200 && n != 1) );
-    
-    if(n == 1)
-    {
-        
-        printf("is happy number");
-        return true;
-    }
-    else
-    {
-        printf("is NOT happy number");
-        return false;
-        
-    }
-
-}
-*/
