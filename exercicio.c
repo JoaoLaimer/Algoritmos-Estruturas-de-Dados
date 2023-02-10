@@ -78,9 +78,9 @@ bool RepeatDetector(int *array,int size)
 
     p = array+size;
 
-            for(i = 1, q = array; i <= size ; q++, i++)
+            for( i = 1, q = array ; i <= size ; q++, i++ )
             {   
-                if(*p == *q)
+                if( *p == *q )
                 {
                     return true;
                     break;
