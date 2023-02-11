@@ -20,11 +20,13 @@ int main(void){
 bool IsHappy(int number)
 {
 
- int separetedNum_array[31],temp = 0,*num_array,*startPoint,i;
+ int temp = 0,i;
+ int *num_array,*startPoint,separetedNum_array[31];
  bool flag = false;
 
     
-    num_array = ( int * )malloc( sizeof( int ) );
+    num_array = ( int * )malloc( 2*sizeof( int ) );
+
     startPoint = num_array;
     do
     {   
@@ -39,9 +41,9 @@ bool IsHappy(int number)
 
         for(i = 31 ; i >= 0 ; i-- )
         {
-            number += pow(separetedNum_array[i],2);
-                 
+            number += separetedNum_array[i]*separetedNum_array[i];
         }
+        
         *num_array = number;
         num_array++;
 
@@ -53,6 +55,11 @@ bool IsHappy(int number)
    
     }while( number != 1 && flag == false );
 
+    for(int i = 0; startPoint != NULL; i++)
+    {
+        printf("%d\n",startPoint[i]);
+    }
+    
     free(startPoint);
 
     if( number == 1 )
@@ -78,7 +85,7 @@ bool RepeatDetector(int *array,int size)
 
     p = array+size;
 
-            for( i = 1, q = array ; i <= size ; q++, i++ )
+            for( i = 1, q = array ; i < size ; q++, i++ )
             {   
                 if( *p == *q )
                 {
