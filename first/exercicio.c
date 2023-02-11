@@ -20,18 +20,18 @@ int main(void){
 bool IsHappy(int number)
 {
 
- int temp = 0,i;
+ int count = 0,i;
  int *num_array,*startPoint,separetedNum_array[31];
  bool flag = false;
 
     
-    num_array = ( int * )malloc( 2*sizeof( int ) );
+    num_array = ( int * )malloc( sizeof( int ) );
 
     startPoint = num_array;
     do
     {   
-        temp++;
-        startPoint = ( int * )realloc( startPoint, temp*sizeof( int ) );
+        count++;
+        startPoint = ( int * )realloc( startPoint, count*sizeof( int ) );
         
         for( i = 31 ; i >= 0 ; i-- )
         {
@@ -47,18 +47,13 @@ bool IsHappy(int number)
         *num_array = number;
         num_array++;
 
-        if( temp > 20 )
+        if( count > 20 )
         { 
-            flag = RepeatDetector( startPoint, temp );
+            flag = RepeatDetector( startPoint, count );
         }
 
    
     }while( number != 1 && flag == false );
-
-    for(int i = 0; startPoint != NULL; i++)
-    {
-        printf("%d\n",startPoint[i]);
-    }
     
     free(startPoint);
 
