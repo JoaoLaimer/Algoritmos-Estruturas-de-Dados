@@ -3,23 +3,33 @@
 #include <string.h>
 
 
-int Menu(void);
+int showMenu(void);
+void getNameList(char *name);
+char* adicionarNome(char *nameString);
+char *removeNameString(char *nameString);
+
 int main(void)
 {
-    char nameString[100];
+    char *nameString;
     int selectedOption;
-    
+
+    nameString = (char *)malloc(sizeof(char));
+   
+    nameString[0] = '\0';
     
     for( ; ; )
     {
-        selectedOption = Menu();
+        selectedOption = showMenu();
         switch (selectedOption)
         {
         case 1:
+            nameString = adicionarNome(nameString);
             break;
         case 2:
+            nameString = removeNameString(nameString);
             break;
         case 3:
+            getNameList(nameString);
             break;
         case 4:
             return 0;
@@ -34,11 +44,11 @@ int main(void)
 
 }
 
-int Menu(void)
+int showMenu(void)
 {
     int selectedOption;
 
-    printf("-------------MENU--------------\n");
+    printf("\n-------------MENU--------------\n");
     
     printf("1 . ADICIONAR NOME\n");
     printf("2 . REMOVER NOME\n");
@@ -49,4 +59,61 @@ int Menu(void)
     scanf("%d",&selectedOption);
 
     return selectedOption;
+}
+
+char* adicionarNome(char *nameString)
+{
+    char *newName;
+    getchar();
+
+    newName = (char*) malloc(sizeof(char));
+
+    printf("INSIRA O NOVO NOME: ");
+    
+    scanf("%s",newName);
+
+    nameString = (char*) realloc(nameString, strlen(nameString) + strlen(newName) + 2);
+    
+    strcat(nameString,newName);
+    strcat(nameString,",");
+    free(newName);
+    return nameString;
+}
+
+void getNameList(char *name)
+{
+    printf("\n%s.\n", name);
+
+    for( int i = 0 ; i < strlen(name) ; i++)
+    {
+        printf("%c",name[i]);
+    }
+}
+
+char* removeNameString(char *nameString)
+{   
+    getchar();
+    char *strToBeRemoved, *strToBeRemovedStart, *temp;
+
+
+    strToBeRemoved = (char *)malloc(sizeof(char));
+    strToBeRemovedStart = strToBeRemoved;
+    //printf("%s",nameString);
+    
+    printf("INSIRA NOME A SER REMOVIDO: ");
+    scanf("%s",strToBeRemoved);
+
+    strToBeRemovedStart = (char *)realloc(strToBeRemovedStart ,strlen(strToBeRemoved)*sizeof(char));
+
+    size_t len = strlen(strToBeRemoved);
+    
+    while((temp = strstr(nameString,strToBeRemoved)) != NULL)
+    {
+        memmove(temp, temp + len + 1, strlen(temp + len) + 1);
+    }
+
+    free(strToBeRemovedStart);
+
+    return nameString;
+
 }
