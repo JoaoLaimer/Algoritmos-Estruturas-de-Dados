@@ -107,10 +107,11 @@ char* removeNameString(char *nameString)
 
     size_t len = strlen(strToBeRemoved);
     
-    while((temp = strstr(nameString,strToBeRemoved)) != NULL)
-    {
+    //while((temp = strstr(nameString,strToBeRemoved)) != NULL)
+    //{
+        temp = strstr(nameString,strToBeRemoved);
         memmove(temp, temp + len + 1, strlen(temp + len) + 1);
-    }
+    //}
 
     free(strToBeRemovedStart);
 
