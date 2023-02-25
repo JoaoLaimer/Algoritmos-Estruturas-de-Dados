@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+int numPessoas = 0;
 int menu(void);
 void adicionarDados(void *pBuffer);
 void listar(void *pBuffer);
@@ -69,68 +69,63 @@ int menu(void)
 
 }
 
-void adicionarDados (void *pBuffer)
+void adicionarDados(void *pBuffer)
 {
-   // char nome[10],idade[2],tel[9];
-    char ch;
     void *p;
+    int c;
 
     printf("\n---------------------------\n");
     
     p = pBuffer;
-   // for(int i = 0; i < sizeof(pBuffer); i++,p++);
+    pBuffer = realloc(pBuffer, 10*sizeof(char) + sizeof(int) + 1*sizeof(char));
+    numPessoas++;
+    printf("%d",numPessoas);
 
-
+    for(p = pBuffer; c != numPessoas;p++)
+    {
+        if( *(char *)p == '.')
+        {
+            c++;
+        }
+    }
+    if( *(char *)p == '.')
+    {
+        p+= sizeof(char);
+    }
     
     printf("NOVO NOME: "); 
     getchar();
-
-    while((ch = getchar()) != '\n' && ch != EOF)
-    {
-        *(char *)p = ch;
-        pBuffer = realloc(pBuffer, sizeof(char) + sizeof(pBuffer));
-        p++;
-    }
-    pBuffer = realloc(pBuffer,sizeof(pBuffer) + 1);
-
-    strcat(pBuffer,",");
-    p++;
-
-    printf("NOVA IDADE: "); 
-
-    while((ch = getchar()) != '\n' && ch != EOF)
-    {
-        *(int *)p = ch;
-        pBuffer = realloc(pBuffer, sizeof(int) + sizeof(pBuffer));
-        (int *)p++;
-    }
-    pBuffer = realloc(pBuffer, sizeof(pBuffer) + sizeof(char));
-
-    strcat(pBuffer,",");
-    p++;
-
-    printf("NOVO TELEFONE: "); 
-
-    while((ch = getchar()) != '\n' && ch != EOF)
-    {
-        *(int *)p = ch;
-        pBuffer = realloc(pBuffer, sizeof(int) + sizeof(pBuffer));
-        (int *)p++;
-    }
-    pBuffer = realloc(pBuffer,sizeof(pBuffer) + 2);
+    scanf("%10s",(char *)p);
 
     strcat(pBuffer,".");
+        
+    for(p = pBuffer; *( char *)p != '.'; p+=sizeof(char) ){}
+    p += sizeof(char);
+
+    printf("IDADE: "); 
+    scanf("%d",(int *)p);
+    p += sizeof(int);
+
+
+    
+
+    
 }
 
 void listar (void *pBuffer)
 {
-    pBuffer = realloc(pBuffer,sizeof(pBuffer) + sizeof(char));
-    strcat(pBuffer,"@");
+
+    int c = 0;
     void *p;
 
-    for(p = pBuffer; *(char *)p != '@';p++)
+    for(p = pBuffer; *(char *)p != '.';p++)
     {
         printf("%c",*(char *)p);
     }
+    printf("%c",*(char *)p);
+    p += sizeof(char);
 
+    printf("%d",*(char *)p);
+    
 }
+
